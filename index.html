@@ -16,7 +16,7 @@
     
  <div class="wrapper"> 
      
-    <div data-role="page" id="takePhotoScreen" class="active">
+    <div data-role="page" id="takePhotoScreen" class="hidden">
   <div data-role="content">
     <h1>Camera Page</h1>
     <p>Some content on the cam page.</p>
@@ -25,7 +25,7 @@
   </div>
 </div>
     
-<div data-role="page" id="gridScreen" class="hidden">
+<div data-role="page" id="gridScreen" class="active">
   <div data-role="content">
     <h1>Photos</h1>
       
@@ -53,8 +53,9 @@
 <!--    navigation tabs    -->
     <nav>
 <ul class="tabs">
-    <li class="tab" id="navCamId"><a href="#camScreen" data-role="pagelink" id="camPageLink" class="activetab">Take Photo</a></li>
-    <li class="tab" id="navGridId"><a href="#gridScreen" data-role="pagelink" id="gridPageLink" class="">Your Photos</a></li>
+    <li class="tab" id="navGridId"><a href="#gridScreen" data-role="pagelink" id="gridPageLink" class="activetab">Your Photos</a></li>
+    <li class="tab" id="navCamId"><a href="#camScreen" data-role="pagelink" id="camPageLink" class="">Take Photo</a></li>
+    
 </ul>
     </nav>
     
