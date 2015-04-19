@@ -1,162 +1,64 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="">
 <head>
     <meta charset="UTF-8">
-    <title>GIFTR</title>
-	<link href="css/main.css" rel="stylesheet"/>
-        <meta name="viewport" content=" width=device-width, height=device-height" />
-      <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/hammer.js"></script>
-        
-<!--	<script src="js/app.js"></script>-->
-  
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.3.js"></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-  
-	<div class="wrapper">
-         
-		<!-- container for all pages -->
-		
-		<section data-role="page" id="people-list" class="active" >
-             <h1>hask0023 - Giftr Application</h1>
-			<h2><img id="peopleHeader">People</h2> <button class="btnAdd" id="addPerson"></button>
-			<p class="details">
-			Here are all the people for which <em>you</em> buy gifts.
-			</p>
-			<ul data-role="listview" id="personList">
-				<!-- 
-				list of items to be dynamically added 
-				single-tap to add gift for person through gifts-for-person page
-				double-tap to remove person
-				-->
 
-			</ul>
-		</section>
-		
-		<section data-role="page" id="occasion-list" class = "">
-              <h1>hask0023 - Giftr Application</h1>
-			<h2><img id="occasionHeader">Occasions </h2><button class="btnAdd" id="addOccasion"></button>
-			<p class="details">
-			Here is the list of occasions when <em>you</em> buy gifts.
-			</p>
-			<ul data-role="listview" id="occasionList">
-				<!-- 
-				list of items to be dynamically added 
-				single-tap to add gift for occasion through gifts-for-occasion page
-				double-tap to remove occasion
-				-->
-                
-			</ul>
-		</section>
-		
-		<section data-role="page" id="gifts-for-person" >
-              <h1>hask0023 - Giftr Application</h1>
-<h2><img class="giftHeader">Gift Ideas </h2><button class="btnBack" id="personGiftBack">back</button><button class="btnAdd" id="addGiftPerson"></button>
-			<p class="details">
-			Here are all the gifts ideas for <span id="nameOfPerson">PERSON</span> for all occasions.
-			</p>
-			<ul data-role="listview" id="gift-list-person">
-				<!-- 
-				list of items to be dynamically added 
-				single-tap gift idea to toggle purchased state for gift
- 				double-tap gift idea to remove from list
-				-->
-			</ul>
-		</section>
-		
-		<section data-role="page" id="gifts-for-occasion">
-              <h1>hask0023 - Giftr Application</h1>
-<h2><img class="giftHeader">Gift Ideas </h2><button class="btnBack" id="occasionGiftBack">back</button><button class="btnAdd" id="addGiftOccasion"></button>
-			<p class="details">
-			Here are all the gift ideas for <span id="nameOfOccasion">OCCASION</span> for all people.
-			</p>
-			<ul data-role="listview" id="gift-list-occasion">
-				<!-- 
-				list of items to be dynamically added 
-				single-tap gift idea to toggle purchased state for gift
-				double-tap gift idea to remove from list
-				-->
-			</ul>
-		</section>
-	</div>
+<body>
+   
+
+    
+ <div class="wrapper"> 
+     
+    <div data-role="page" id="takePhotoScreen" class="active">
+  <div data-role="content">
+    <h1>Camera Page</h1>
+    <p>Some content on the cam page.</p>
+     
+    
+  </div>
+</div>
+    
+<div data-role="page" id="gridScreen" class="hidden">
+  <div data-role="content">
+    <h1>Photos</h1>
+      
+    <ul id="gridList">
+      
+    </ul>
+   
+      
+    </div>
+    
+  </div>
+</div>
+
+    
+<div data-role="overlay">&nbsp;</div>
 	
-	<!-- always display the overlay between a page and modal -->
-	<div data-role="overlay">&nbsp;</div>
-	
-	<!-- modal for adding an entry to person table -->
-	<div data-role="modal" id="add-person">
-		<h3>New person</h3>
-		<form>
-			<div class="formBox">
-				<input type="text" id="new-per" value="" placeholder="" class=""/>
-			</div>
-			<div class="formBox">
-				<input type="button" class="btnCancel" value="CANCEL" />
-				<input type="button" class="btnSave" id="btnPersonSave" value="SAVE" />
-			</div>
-		</form>	
-	</div>
-	
-<!--    modal for adding an entry to occasion table  -->
-    <div data-role="modal" id="add-occasion">
-		<h3>New occasion</h3>
-		<form>
-			<div class="formBox">
-				<input type="text" id="new-occ" value="" placeholder="" class=""/>
-			</div>
-			<div class="formBox">
-				<input type="button" class="btnCancel" value="CANCEL" />
-				<input type="button" class="btnSave" id="btnOccasionSave" value="SAVE" />
-			</div>
-		</form>	
+	<!-- modal for popup image -->
+	<div data-role="modal" id="fullImage">
+		<h2>Click anywhere on overlay to exit</h2>
+		<img id="bigImage" class="bigImage"></img>
+
 	</div>
     
     
-	<!-- modal for adding an entry to gift idea table. Requires a person or occasion plus the idea -->
-	<div data-role="modal" id="add-gift-occasion">
-		<h3 id ="newGiftOccasionTitle">New gift idea</h3>
-		<form>
-			<div class="formBox">
-				<select id="list-per-occ">
-					<option value="0">Choose one</option>
-					<!-- list of options built from person list or occasion list -->
-				</select>
-			</div>
-			<div class="formBox">
-				<input type="text" id="new-idea-occasion" value="" placeholder="" class=""/>
-			</div>
-			<div class="formBox">
-				<input type="button" class="btnCancel" value="CANCEL" />
-				<input type="button" class="btnSave" value="SAVE" id="saveGiftOccasion"/>
-			</div>
-		</form>	
-	</div>
+<!--    navigation tabs    -->
+    <nav>
+<ul class="tabs">
+    <li class="tab" id="navCamId"><a href="#camScreen" data-role="pagelink" id="camPageLink" class="activetab">Take Photo</a></li>
+    <li class="tab" id="navGridId"><a href="#gridScreen" data-role="pagelink" id="gridPageLink" class="">Your Photos</a></li>
+</ul>
+    </nav>
     
-    
-    	<div data-role="modal" id="add-gift-person">
-		<h3 id="newGiftPersonTitle">New gift idea</h3>
-		<form>
-			<div class="formBox">
-				<select id="list-per-person">
-					<option value="0">Choose one</option>
-					<!-- list of options built from person list or occasion list -->
-				</select>
-			</div>
-			<div class="formBox">
-				<input type="text" id="new-idea-person" value="" placeholder="" class=""/>
-			</div>
-			<div class="formBox">
-				<input type="button" class="btnCancel" value="CANCEL" />
-				<input type="button" class="btnSave"  value="SAVE" id="saveGiftPerson" />
-			</div>
-		</form>	
-	</div>
-    
-    
+
     
 </body>
 </html>
-
-
